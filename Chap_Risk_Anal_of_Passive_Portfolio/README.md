@@ -25,3 +25,9 @@ n = length(log_return)
 
 plot(log_return)
 ```
+
+<p align = "center">
+<img src="./plot_Nifty50.jpeg" alt="drawing" width="400" height="275"/>
+<img src="./plot_Nifty50_log_return.jpeg" alt="drawing" width="400" height="275"/>
+</p>
+
