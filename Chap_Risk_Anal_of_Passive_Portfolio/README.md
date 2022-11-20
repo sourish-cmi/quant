@@ -1,6 +1,6 @@
 # Risk Analysis of Passive Portfolio
 
-## Sourish
+## Sourish Das
 
 ### **Abstract**
 
