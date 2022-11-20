@@ -10,6 +10,8 @@ In this work, we present an alternative passive investment strategy. The passive
 
 ### Download data from Yahoo
 
+Download Nifty 50 from Yahoo using the `quantmod` package in `R`, and plot the closing value of Nifty 50 and the log-return.
+
 ```R
 rm(list=ls())
 library(quantmod)
