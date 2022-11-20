@@ -33,3 +33,52 @@ plot(log_return)
 <img src="./plot_Nifty50_log_return.jpeg" alt="drawing" width="400" height="275"/>
 </p>
 
+
+### Check for Efficient Market Hypothesis with Nifty 50
+
+Step 1: Check if values of Nifty 50 is non-stationary
+```R
+> library(tseries)
+> adf.test(na.omit(Nifty50))
+data:  na.omit(Nifty50)
+Dickey-Fuller = -2.1463, Lag order = 15, p-value = 0.5164
+alternative hypothesis: stationary
+```
+**Inference**: Fail to reject null hypothesis. That is Nifty 50 values are non-stationary random-walk process.
+
+Step 2: Check if log-returns are non-stationary with Dickey-Fuller test
+
+```R
+
+> adf.test(na.omit(log_return))
+
+data:  na.omit(log_return)
+Dickey-Fuller = -14.327, Lag order = 15, p-value = 0.01
+alternative hypothesis: stationary
+```
+
+**Inference**: We reject the null hypothesis. That is log-returns of Nifty 50 are stationary.
+
+Step 3: Check if the log-returns are uncorrelated with Ljung-Box test.
+
+```R
+> Box.test(log_return,lag=10,type = "Ljung-Box")
+data:  log_return
+X-squared = 37.234, df = 10, p-value = 5.155e-05
+```
+
+**Inference**: We reject null hypothesis as p-value is significantly small. That is log-returns of Nifty 50 are correlated.
+
+
+Step 4: Check if the log-returns are Normal with Shapiro-Wilk test for normality, (see \cite{shapiro_wil_test}).
+
+```R
+## Shapiro-Wilk test for normality
+## Null Hypothesis: log-return follows Normal distribution
+## Alternative Hypothesis : log-return does not 
+##                          follow a normal distribution
+> shapiro.test(as.vector(log_return))
+data:  as.vector(log_return)
+W = 0.89425, p-value < 2.2e-16
+```  
+**Inference**: We reject null hypothesis as p-value is significantly small. That is log-return of Nifty 50 does not follow Gaussian distribution.
