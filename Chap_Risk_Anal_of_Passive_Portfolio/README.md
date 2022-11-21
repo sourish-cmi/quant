@@ -82,3 +82,35 @@ data:  as.vector(log_return)
 W = 0.89425, p-value < 2.2e-16
 ```  
 **Inference**: We reject null hypothesis as p-value is significantly small. That is log-return of Nifty 50 does not follow Gaussian distribution.
+
+
+## Portfolio Risk Analysis
+
+### Download Nifty50 stocks
+
+```R
+nifty50_wt = read.csv('ind_nifty50list_weightage.csv',sep='\t')
+colnames(nifty50_wt)[3]<-'Symbol'
+nifty50_wt$Symbol = trimws(nifty50_wt$Symbol)
+nifty50_wt = nifty50_wt[with(nifty50_wt, order(Symbol)), ]
+
+### download stock data
+symbol = nifty50_wt$Symbol
+symbol_call = paste0(symbol,'.NS')
+df = get.hist.quote(symbol_call[1],start='2019-01-01'
+                    ,quote = 'Adjusted')
+colnames(df)=symbol[1]
+
+data = df
+
+
+for( i in 2:length(symbol)){
+  df = get.hist.quote(symbol_call[i],start='2019-01-01'
+                      ,quote = 'Adjusted')
+  colnames(df)=symbol[i]
+  data = merge(data,df)
+  cat(i,' = ',symbol[i],'\n')
+}
+
+df = xts(data)
+```
