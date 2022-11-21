@@ -255,5 +255,41 @@ cctr_dur_war_percent = cctr_dur_war/sum(cctr_dur_war)*100
 
 cctr_passive<-cbind.data.frame(cctr_b4_war_percent,cctr_dur_war_percent)
 cctr_passive<- cctr_passive[with(cctr_passive,order(-cctr_b4_war_percent)),]
+```
+
+
+## Risk Analysis of Equal weight portfolio
+
+```R
+eql_wt<-rep(1/P,P)
+
+equl_port_vol_b4_war = sqrt(t(eql_wt)%*%reg_cov_b4_war%*%eql_wt)*sqrt(52)
+equl_port_vol_dur_war = sqrt(t(eql_wt)%*%reg_cov_dur_war%*%eql_wt)*sqrt(52)
+
+mctr_b4_war = (reg_cov_b4_war%*%eql_wt)*52/as.numeric(equl_port_vol_b4_war)
+cctr_b4_war = mctr_b4_war*eql_wt
+cctr_b4_war_percent = cctr_b4_war/sum(cctr_b4_war)*100
+
+mctr_dur_war = (reg_cov_dur_war%*%eql_wt)*52/as.numeric(equl_port_vol_dur_war)
+cctr_dur_war = mctr_dur_war*weight
+cctr_dur_war_percent = cctr_dur_war/sum(cctr_dur_war)*100
+
+cctr_passive<-cbind.data.frame(cctr_b4_war_percent,cctr_dur_war_percent)
+cctr_passive<- cctr_passive[with(cctr_passive,order(-cctr_b4_war_percent)),]
+
+```
+
+## Present Portfolio before and during the Russia-Ukraine War
+```R
+vol_df<-matrix(c(port_vol_b4_war
+        ,port_vol_dur_war
+        ,optim_port_vol_b4_war
+        ,optim_port_vol_dur_war
+        ,equl_port_vol_b4_war
+        ,equl_port_vol_dur_war),nrow=2,ncol=3,byrow=F)
+colnames(vol_df)<-c('Portfolio with Nifty Weights'
+                    ,'Portfolio with Markowitz Weights'
+                    ,'Portfolio with Equal Weights')
+rownames(vol_df)<-c('Before the War','During the War')
 
 ```
