@@ -159,3 +159,11 @@ dim(rt_during_war)
 [1] 14 50
 
 ```
+
+### Calculate sample covariance matrix
+
+```R
+## sample covariance
+S_b4_war = cov(rt_b4_war)
+S_dur_war =cov(rt_during_war)
+```
