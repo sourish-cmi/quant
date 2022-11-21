@@ -239,3 +239,21 @@ cctr_opt<-cbind.data.frame(cctr_b4_war_opt_percent,cctr_dur_war_opt_percent)
 cctr_opt<- cctr_opt[with(cctr_opt,order(-cctr_b4_war_opt_percent)),]
 ```
 
+## Risk Analysis of Passive Portfolio with Nifty weights
+
+```R
+port_vol_b4_war = sqrt(t(weight)%*%reg_cov_b4_war%*%weight)*sqrt(52)
+port_vol_dur_war = sqrt(t(weight)%*%reg_cov_dur_war%*%weight)*sqrt(52)
+
+mctr_b4_war = (reg_cov_b4_war%*%weight)*52/as.numeric(port_vol_b4_war)
+cctr_b4_war = mctr_b4_war*weight
+cctr_b4_war_percent = cctr_b4_war/sum(cctr_b4_war)*100
+
+mctr_dur_war = (reg_cov_dur_war%*%weight)*52/as.numeric(port_vol_dur_war)
+cctr_dur_war = mctr_dur_war*weight
+cctr_dur_war_percent = cctr_dur_war/sum(cctr_dur_war)*100
+
+cctr_passive<-cbind.data.frame(cctr_b4_war_percent,cctr_dur_war_percent)
+cctr_passive<- cctr_passive[with(cctr_passive,order(-cctr_b4_war_percent)),]
+
+```
