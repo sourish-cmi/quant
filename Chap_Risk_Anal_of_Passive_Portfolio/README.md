@@ -219,3 +219,23 @@ barplot(sort(weight)*100,horiz=T,xlim=c(0,15),sub='Nifty 50 weights')
 <img src="./weight_opt.jpeg" alt="drawing" width="400" height="275"/>
 </p>
 
+
+## Risk Analysis of optim portfolio with regularized covariance
+
+
+```R
+optim_port_vol_b4_war = sqrt(t(b4_war_opt_weight)%*%reg_cov_b4_war%*%b4_war_opt_weight)*sqrt(52)
+optim_port_vol_dur_war = sqrt(t(b4_war_opt_weight)%*%reg_cov_dur_war%*%b4_war_opt_weight)*sqrt(52)
+
+mctr_b4_war_opt = (reg_cov_b4_war%*%b4_war_opt_weight)*52/as.numeric(optim_port_vol_b4_war)
+cctr_b4_war_opt = mctr_b4_war_opt*b4_war_opt_weight
+cctr_b4_war_opt_percent = cctr_b4_war_opt/sum(cctr_b4_war_opt)*100
+
+mctr_dur_war_opt = (reg_cov_dur_war%*%b4_war_opt_weight)*52/as.numeric(optim_port_vol_dur_war)
+cctr_dur_war_opt = mctr_dur_war*weight
+cctr_dur_war_opt_percent = cctr_dur_war_opt/sum(cctr_dur_war_opt)*100
+
+cctr_opt<-cbind.data.frame(cctr_b4_war_opt_percent,cctr_dur_war_opt_percent)
+cctr_opt<- cctr_opt[with(cctr_opt,order(-cctr_b4_war_opt_percent)),]
+```
+
