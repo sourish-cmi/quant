@@ -130,3 +130,20 @@ data_wkly = data[ep1]
 data_b4_war = data_wkly['/2022-02-20']
 data_during_war = data_wkly['2022-02-20/']
 ```
+
+
+### Calculate log-return
+
+```R
+rt_b4_war=data_b4_war
+n=nrow(data_b4_war)
+P=ncol(data_b4_war)
+for(j in 1:P){
+  rt_b4_war[,j]=diff(log(data_b4_war[,j]))*100
+}
+rt_b4_war= na.omit(rt_b4_war)
+dim(rt_b4_war)
+
+[1] 13 50
+
+```
