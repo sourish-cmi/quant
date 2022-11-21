@@ -292,4 +292,10 @@ colnames(vol_df)<-c('Portfolio with Nifty Weights'
                     ,'Portfolio with Equal Weights')
 rownames(vol_df)<-c('Before the War','During the War')
 
+t(vol_df)
+                                 Before the War During the War
+Portfolio with Nifty Weights          11.353266       13.65940
+Portfolio with Markowitz Weights       8.300446       11.40537
+Portfolio with Equal Weights           9.028937       11.29634
+
 ```
