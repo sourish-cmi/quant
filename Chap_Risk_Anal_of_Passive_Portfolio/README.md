@@ -203,4 +203,11 @@ lambda=mean(diag(S_dur_war))
 Cov_prior=diag(P)*lambda
 reg_cov_dur_war = q*Cov_prior+(1-q)*S_dur_war
 
+## Portfolio Optimisation using b4 war data only
+b4_war_opt_weight = portfolio.optim(rt_b4_war,covmat=reg_cov_b4_war,shorts=F)$pw
+names(b4_war_opt_weight)=rownames(reg_cov_b4_war)
+barplot(sort(b4_war_opt_weight)*100,horiz=T,xlim=c(0,15),sub='Optimised Weight')
+barplot(sort(weight)*100,horiz=T,xlim=c(0,15),sub='Nifty 50 weights')
+
+
 ```
