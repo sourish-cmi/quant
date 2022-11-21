@@ -146,4 +146,16 @@ dim(rt_b4_war)
 
 [1] 13 50
 
+
+rt_during_war = data_during_war
+n=nrow(data_during_war)
+P=ncol(data_during_war)
+for(j in 1:P){
+  rt_during_war[,j]=diff(log(data_during_war[,j]))*100
+}
+rt_during_war= na.omit(rt_during_war)
+dim(rt_during_war)
+
+[1] 14 50
+
 ```
