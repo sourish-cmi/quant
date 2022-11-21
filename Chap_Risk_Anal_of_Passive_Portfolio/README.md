@@ -114,3 +114,19 @@ for( i in 2:length(symbol)){
 
 df = xts(data)
 ```
+
+### Consider the dataset between ''2021-08/2022-08' and weekly prices
+
+
+```R
+data = df['2021-08/2022-08']
+ep1 <- endpoints(data,on="weeks",k=2)
+data_wkly = data[ep1]
+```
+
+### Split the data between before the Russian invasion of Ukraine and during the ware
+
+```R
+data_b4_war = data_wkly['/2022-02-20']
+data_during_war = data_wkly['2022-02-20/']
+```
