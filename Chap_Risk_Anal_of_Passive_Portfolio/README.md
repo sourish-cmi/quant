@@ -179,3 +179,28 @@ nifty50_wt$WEIGHTAGE = (nifty50_wt$WEIGHTAGE/sum(nifty50_wt$WEIGHTAGE))
 weight=nifty50_wt$WEIGHTAGE
 names(weight)=nifty50_wt$Symbol
 ```
+
+## Markowitz's Optimised portfolio
+
+```R
+## optim portfolio
+## calculate regularised covariance
+n=dim(rt_b4_war)[1]
+P=dim(rt_b4_war)[2]
+c=0.01
+n0 = (P-n)+c
+q=(n0+P+1)/(n0+n+P)
+lambda=mean(diag(S_b4_war))
+Cov_prior=diag(P)*lambda
+reg_cov_b4_war = q*Cov_prior+(1-q)*S_b4_war
+
+n=dim(rt_during_war)[1]
+P=dim(rt_during_war)[2]
+c=0.01
+n0 = (P-n)+c
+q=(n0+P+1)/(n0+n+P)
+lambda=mean(diag(S_dur_war))
+Cov_prior=diag(P)*lambda
+reg_cov_dur_war = q*Cov_prior+(1-q)*S_dur_war
+
+```
