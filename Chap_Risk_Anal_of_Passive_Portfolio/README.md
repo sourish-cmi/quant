@@ -205,9 +205,17 @@ reg_cov_dur_war = q*Cov_prior+(1-q)*S_dur_war
 
 ## Portfolio Optimisation using b4 war data only
 b4_war_opt_weight = portfolio.optim(rt_b4_war,covmat=reg_cov_b4_war,shorts=F)$pw
+
+## add naes to the optimised weights
 names(b4_war_opt_weight)=rownames(reg_cov_b4_war)
+
+## Draw barplots of weights
 barplot(sort(b4_war_opt_weight)*100,horiz=T,xlim=c(0,15),sub='Optimised Weight')
 barplot(sort(weight)*100,horiz=T,xlim=c(0,15),sub='Nifty 50 weights')
-
-
 ```
+
+<p align = "center">
+<img src="./weight_nifty.jpeg" alt="drawing" width="400" height="275"/>
+<img src="./weight_opt.jpeg" alt="drawing" width="400" height="275"/>
+</p>
+
