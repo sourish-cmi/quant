@@ -167,3 +167,15 @@ dim(rt_during_war)
 S_b4_war = cov(rt_b4_war)
 S_dur_war =cov(rt_during_war)
 ```
+
+
+### Portfolio with Nifty 50 weights
+
+```R
+nifty50_wt$WEIGHTAGE=trimws(nifty50_wt$WEIGHTAGE)
+
+nifty50_wt$WEIGHTAGE = as.numeric(nifty50_wt$WEIGHTAGE)
+nifty50_wt$WEIGHTAGE = (nifty50_wt$WEIGHTAGE/sum(nifty50_wt$WEIGHTAGE))
+weight=nifty50_wt$WEIGHTAGE
+names(weight)=nifty50_wt$Symbol
+```
